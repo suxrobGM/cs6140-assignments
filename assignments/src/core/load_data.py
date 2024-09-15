@@ -54,10 +54,12 @@ def get_city_listing():
 
 
 def get_review_df():
+    get_data()
     #returns a df of all review data
     return pd.read_csv('assignments/dataset/assignment1/all_review_data.csv')
 
 def get_listing_df():
+    get_data()
     #returns a df of all listing data
     return pd.read_csv('assignments/dataset/assignment1/all_listing_data.csv')
 
