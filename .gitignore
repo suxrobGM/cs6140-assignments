@@ -155,7 +155,7 @@ dmypy.json
 cython_debug/
 
 #assign_1_data
-assignments/dataset/assignment1
+assignments/dataset/assignment1/*
 
 
 
