@@ -3,14 +3,20 @@ import requests
 import gzip
 import shutil
 
-def download_dataset() -> list[str]:
+class AirbnbData:
+    def __init__(self, city: str, listings_csv: str, reviews_csv: str):
+        self.city = city
+        self.listings_csv = listings_csv
+        self.reviews_csv = reviews_csv
+
+def download_dataset() -> list[AirbnbData]:
     """
     Download the Airbnb dataset for five cities and save them as CSV files in the dataset/assignment1 directory.
     Cities: Boston, New York, Montreal, Albany, Washington DC
     Returns:
-        A list of the file paths of the downloaded datasets.
+        A list of AirbnbData objects containing the city name, listings CSV file path, and reviews CSV file path.
     """
-    extracted_files_path: list[str] = []
+    extracted_files: list[AirbnbData] = []
     dest_dir = os.path.abspath(os.path.join(os.getcwd(), "../dataset/assignment1"))
     base_url = "https://data.insideairbnb.com"
     files_to_download: list[dict[str, str]] = [
@@ -64,11 +70,9 @@ def download_dataset() -> list[str]:
         else:
             download_and_extract(reviews_url, reviews_file_path)
     
-        extracted_files_path.append(reviews_file_path)
-        extracted_files_path.append(listings_file_path)
+        extracted_files.append(AirbnbData(city, listings_file_path, reviews_file_path))
         
-
-    return extracted_files_path
+    return extracted_files
 
 def download_and_extract(url: str, dest_path: str):
     """
@@ -84,9 +88,9 @@ def download_and_extract(url: str, dest_path: str):
         print(f"Downloaded {url})")
 
     # Extract the gzip file
-    with gzip.open("temp.gz", "rb") as f_in:
-        with open(dest_path, "wb") as f_out:
-            shutil.copyfileobj(f_in, f_out)
+    with gzip.open("temp.gz", "rb") as gzip_file:
+        with open(dest_path, "wb") as extracted_file:
+            shutil.copyfileobj(gzip_file, extracted_file)
             print(f"Extracted to {dest_path}")
 
     # Remove the temporary gzip file
