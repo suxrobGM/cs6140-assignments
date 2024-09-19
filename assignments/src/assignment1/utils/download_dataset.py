@@ -13,7 +13,7 @@ def download_dataset() -> list[str]:
     extracted_files_path: list[str] = []
     dest_dir = os.path.abspath(os.path.join(os.getcwd(), "../dataset/assignment1"))
     base_url = "https://data.insideairbnb.com"
-    files_to_download: list[dict] = [
+    files_to_download: list[dict[str, str]] = [
         {
             "city": "boston",
             "listings_url": f"{base_url}/united-states/ma/boston/2024-06-22/data/listings.csv.gz",
@@ -46,9 +46,9 @@ def download_dataset() -> list[str]:
         os.makedirs(dest_dir)
 
     for file_data in files_to_download:
-        city: str = file_data["city"]
-        listings_url: str = file_data["listings_url"]
-        reviews_url: str = file_data["reviews_url"]
+        city = file_data["city"]
+        listings_url = file_data["listings_url"]
+        reviews_url = file_data["reviews_url"]
 
         # Check if the file already exists
         listings_file_path = os.path.join(dest_dir, f"{city}_listings.csv")
