@@ -154,8 +154,8 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-#assign_1_data
-assignments/dataset/assignment1/*
+# Exclude large CSV files in dataset/assignment1 folder
+dataset/assignment1/*.csv
 
 
 
