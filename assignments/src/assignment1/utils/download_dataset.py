@@ -12,6 +12,7 @@ class AirbnbData:
 def download_dataset() -> list[AirbnbData]:
     """
     Download the Airbnb dataset for five cities and save them as CSV files in the dataset/assignment1 directory.
+    If the files already exist, they will not be downloaded again and the existing files will be used.
     Cities: Boston, New York, Montreal, Albany, Washington DC
     Returns:
         A list of AirbnbData objects containing the city name, listings CSV file path, and reviews CSV file path.
