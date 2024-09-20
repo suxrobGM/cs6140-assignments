@@ -17,7 +17,7 @@ def download_dataset() -> list[AirbnbData]:
         A list of AirbnbData objects containing the city name, listings CSV file path, and reviews CSV file path.
     """
     extracted_files: list[AirbnbData] = []
-    dest_dir = os.path.abspath(os.path.join(os.getcwd(), "../dataset/assignment1"))
+    dest_dir = os.path.abspath("../../../dataset/assignment1")
     base_url = "https://data.insideairbnb.com"
     files_to_download: list[dict[str, str]] = [
         {
@@ -60,14 +60,10 @@ def download_dataset() -> list[AirbnbData]:
         listings_file_path = os.path.join(dest_dir, f"{city}_listings.csv")
         reviews_file_path = os.path.join(dest_dir, f"{city}_reviews.csv")
 
-        if os.path.exists(listings_file_path):
-            print(f"{city.capitalize()} listings file already exists.")
-        else:
+        if not os.path.exists(listings_file_path):
             download_and_extract(listings_url, listings_file_path)
 
-        if os.path.exists(reviews_file_path):
-            print(f"{city.capitalize()} reviews file already exists.")
-        else:
+        if not os.path.exists(reviews_file_path):
             download_and_extract(reviews_url, reviews_file_path)
     
         extracted_files.append(AirbnbData(city, listings_file_path, reviews_file_path))
