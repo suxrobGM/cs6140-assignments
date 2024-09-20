@@ -68,7 +68,7 @@ def plot_outliers_boxplot(df: pd.DataFrame, city: str, columns: list[str]) -> No
     Args:
         df (DataFrame): The DataFrame containing the city listings data.
         city (str): Name of the city.
-        columns (list): List of numerical columns to analyze.
+        columns (list[str]): List of numerical columns to analyze.
     """
     for column in columns:
         # Create a box plot to visualize outliers
@@ -92,7 +92,7 @@ def display_outliers(df: pd.DataFrame, city: str, columns: list[str]) -> None:
     Args:
         df (DataFrame): The DataFrame containing the city listings data.
         city (str): Name of the city.
-        columns (list): List of numerical columns to analyze.
+        columns (list[str]): List of numerical columns to analyze.
     """
     print(f"\nOutliers in {city}:\n")
 

@@ -18,7 +18,7 @@ def download_dataset() -> list[AirbnbData]:
         A list of AirbnbData objects containing the city name, listings CSV file path, and reviews CSV file path.
     """
     extracted_files: list[AirbnbData] = []
-    dest_dir = os.path.abspath("../../../dataset/assignment1")
+    dest_dir = os.path.abspath("../../dataset/assignment1")
     base_url = "https://data.insideairbnb.com"
     files_to_download: list[dict[str, str]] = [
         {
