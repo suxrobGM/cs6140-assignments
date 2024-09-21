@@ -4,6 +4,7 @@ import seaborn as sns
 from utils import download_dataset
 
 def run() -> None:
+    print("Text Analysis\n")
     dataset = download_dataset()
     
     for data in dataset:
@@ -30,13 +31,10 @@ def run() -> None:
         print(f"Correlation between character count and review scores: {correlation_char_count}")
 
         # Display the first few rows of the new dataframe
-        print(merged_df[["listing_id", "name", "comments", "word_count", "char_count", "review_scores_rating"]])
+        print(merged_df[["listing_id", "name", "comments", "word_count", "char_count", "review_scores_rating"]].head())
 
         # Draw correlation heatmap
         plot_correlation_heatmap(city, merged_df)
-
-        # Draw scatter plots
-        plot_scatter(city, merged_df)
 
 
 def calc_word_count(text: str) -> int:

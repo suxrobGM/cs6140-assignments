@@ -4,6 +4,7 @@ import pandas as pd
 from utils import download_dataset
 
 def run() -> None:
+    print("Outlier Detection\n")
     dataset = download_dataset()
 
     # Columns for outlier detection
