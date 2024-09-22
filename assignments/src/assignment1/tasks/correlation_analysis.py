@@ -11,12 +11,24 @@ def run() -> None:
     
     for data in dataset:
         city = data.city
+        
+        listings = pd.read_csv(data.listings_csv)
 
-        #Get all numeric categories
-        numerical_cats = pd.read_csv(data.listings_csv).select_dtypes(include=['number'])
+        # Clean the 'price' column
+        listings['price'] = listings['price'].replace({'\$': '', ',': ''}, regex=True).astype(float)
+
+        # Clean percent columns 
+        listings['host_response_rate'] = listings['host_response_rate'].replace({'%': ''}, regex=True).astype(float) / 100
+        listings['host_acceptance_rate'] = listings['host_acceptance_rate'].replace({'%': ''}, regex=True).astype(float) / 100
+            
+
+        #Select umerical columns
+        numerical_cats = listings.select_dtypes(include=['number'])
         
         #drop ids
         numerical_cats = numerical_cats.drop(columns=['id', 'scrape_id', 'host_id'])
+        #Dropping_obvs_associations
+        numerical_cats = numerical_cats.drop(columns= ['minimum_minimum_nights', 'maximum_minimum_nights', 'minimum_maximum_nights', 'maximum_maximum_nights', 'minimum_nights_avg_ntm', 'host_total_listings_count', "latitude", "longitude"])
 
         correllations = numerical_cats.corr()
 
