@@ -7,7 +7,6 @@ def run() -> None:
     print("Correlation Analysis\n")
     dataset = download_dataset()
 
-    dataset = download_dataset()
     
     for data in dataset:
         city = data.city
@@ -27,7 +26,7 @@ def run() -> None:
         
         #drop ids
         numerical_cats = numerical_cats.drop(columns=['id', 'scrape_id', 'host_id'])
-        #Dropping_obvs_associations
+        #Dropping redundant cats to reduce reading
         numerical_cats = numerical_cats.drop(columns= ['minimum_minimum_nights', 'maximum_minimum_nights', 'minimum_maximum_nights', 'maximum_maximum_nights', 'minimum_nights_avg_ntm', 'host_total_listings_count', "latitude", "longitude"])
 
         correllations = numerical_cats.corr()
