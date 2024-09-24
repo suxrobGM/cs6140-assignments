@@ -11,7 +11,6 @@ def run() -> None:
     columns = ["price", "minimum_nights", "review_scores_rating"]
 
     for data in dataset:
-        # Clean the city name and read the listings CSV
         city = data.city.replace("-", " ").capitalize()
         listings = pd.read_csv(data.listings_csv)
 
