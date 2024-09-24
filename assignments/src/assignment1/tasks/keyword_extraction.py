@@ -1,5 +1,5 @@
-import os
 import pandas as pd
+from matplotlib import pyplot as plt
 from utils import download_dataset
 
 # List of keywords to search for in the reviews
@@ -19,16 +19,12 @@ def run() -> None:
 
         # Create binary features for each keyword
         for keyword in KEYWORDS:
-            reviews[f"contains_{keyword}"] = reviews["comments"].apply(lambda text: is_keyword_present(text, keyword))
+            reviews[keyword] = reviews["comments"].apply(lambda text: is_keyword_present(text, keyword))
 
         # Display the first few rows with the new keyword features
         print(f"Keyword features for {city}:")
-        print(reviews[["comments"] + [f"contains_{keyword}" for keyword in KEYWORDS]].head())
-
-        # Save the new DataFrame with keyword features to a CSV
-        csv_path = os.path.abspath(f"../../dataset/assignment1/{data.city}_reviews_with_keywords.csv")
-        reviews.to_csv(csv_path, index=False)
-        print(f"Saved CSV with keyword features to {csv_path}")
+        print(reviews[["comments"] + [keyword for keyword in KEYWORDS]].head())
+        plot_histogram(reviews, city)
 
 def is_keyword_present(text: str, keyword: str) -> int:
     """
@@ -40,3 +36,21 @@ def is_keyword_present(text: str, keyword: str) -> int:
         int: 1 if the keyword is present, 0 otherwise.
     """
     return int(keyword.lower() in text.lower())
+
+def plot_histogram(data: pd.DataFrame, city: str) -> None:
+    """
+    Plots a histogram of the keyword features.
+    Args:
+        data (DataFrame): The DataFrame containing the keyword features.
+        city (str): The name of the city.
+    """
+
+    # Create a DataFrame with the sum of each keyword feature
+    keyword_counts = data[[keyword for keyword in KEYWORDS]].sum()
+
+    # Plot a histogram of the keyword counts
+    keyword_counts.plot(kind="bar", figsize=(10, 6))
+    plt.title(f"Keyword Counts in Reviews for {city}")
+    plt.xlabel("Keyword")
+    plt.ylabel("Count")
+    plt.show()

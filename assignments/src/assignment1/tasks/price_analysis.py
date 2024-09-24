@@ -1,6 +1,6 @@
 import pandas as pd
-from utils import download_dataset, AirbnbData
 import matplotlib.pyplot as plt
+from utils import download_dataset, AirbnbData
 
 def run() -> None:
     dataset = download_dataset()
@@ -12,8 +12,6 @@ def neighborhood_price_relation(dataset: list[AirbnbData]) -> None:
     print("Neighborhood Price Relation\n")
     for data in dataset:
         city = data.city.replace("-", " ").capitalize()
-
-        # Load the listings data for Montreal
         listings = pd.read_csv(data.listings_csv)
 
         # Checking if "neighbourhood" and "price" fields exist
@@ -40,8 +38,6 @@ def roomType_price_relation(dataset: list[AirbnbData]) -> None:
     print("Room Type Price Relation\n")
     for data in dataset:
         city = data.city.replace("-", " ").capitalize()
-
-        # Load the listings data for Montreal
         listings = pd.read_csv(data.listings_csv)
 
         # Checking if "neighbourhood" and "price" fields exist
@@ -70,13 +66,10 @@ def neighbourhood_minimum_nights_relation(dataset: list[AirbnbData]) -> None:
     print("Neighbourhood Minimum Nights Relation\n")
     for data in dataset:
         city = data.city.replace("-", " ").capitalize()
-
-        # Load the listings data for Montreal
         listings = pd.read_csv(data.listings_csv)
 
         # Checking if "neighbourhood" and "price" fields exist
         if "host_neighbourhood" in listings.columns and "minimum_nights" in listings.columns:
-            
             # Clean data: Remove rows with missing values for "host_neighbourhood" and "price"
             listings_cleaned = listings[["host_neighbourhood", "minimum_nights"]].dropna()
             

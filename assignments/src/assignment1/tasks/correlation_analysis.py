@@ -1,7 +1,7 @@
 import pandas as pd
-from utils import download_dataset
 import seaborn as sns
 import matplotlib.pyplot as plt
+from utils import download_dataset
 
 def run() -> None:
     print("Correlation Analysis\n")
@@ -23,6 +23,7 @@ def run() -> None:
         
         #drop ids
         numerical_cats = numerical_cats.drop(columns=["id", "scrape_id", "host_id"])
+
         #Dropping redundant cats to reduce reading
         numerical_cats = numerical_cats.drop(columns= [
             "minimum_minimum_nights",

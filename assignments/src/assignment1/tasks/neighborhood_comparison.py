@@ -15,12 +15,10 @@ def review_scores_rating_neighbourhood_cleansed(dataset: list[AirbnbData]) -> No
 
         # Checking if "neighbourhood" and "price" fields exist
         if "review_scores_rating" in listings.columns and "neighbourhood_cleansed" in listings.columns:
-            
             # Clean data: Remove rows with missing values for "host_neighbourhood" and "price"
             listings_cleaned = listings[["review_scores_rating", "neighbourhood_cleansed"]].dropna()
             
             # Convert price to numeric
-            # listings_cleaned["price"] = pd.to_numeric(listings_cleaned["price"], errors="coerce")
             listings_cleaned["review_scores_rating"] = listings_cleaned["review_scores_rating"].replace("[$,]", "", regex=True).astype(float)
             
             # Group by neighborhood and calculate the average price and standard deviation
