@@ -156,7 +156,7 @@ cython_debug/
 
 # Exclude large CSV files in dataset/assignment1 folder
 /assignments/dataset/assignment1/*.csv
-
+/assignments/dataset/assignment2/*.csv
 
 
 # PyCharm
