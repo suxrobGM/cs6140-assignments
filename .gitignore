@@ -154,9 +154,10 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-# Exclude large CSV files in dataset/assignment1 folder
+# Exclude large CSV files in dataset folder
 /assignments/dataset/assignment1/*.csv
 /assignments/dataset/assignment2/*.csv
+/assignments/dataset/assignment4/*.csv
 
 
 # PyCharm
